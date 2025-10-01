@@ -2,6 +2,7 @@ use std::{fs, path::PathBuf};
 
 use clap::{Parser, Subcommand};
 use miette::{Context, IntoDiagnostic};
+use quarry::token::Lexer;
 
 #[derive(Debug, Parser)]
 #[command(version, about, long_about = None)]
@@ -16,18 +17,45 @@ enum Commands {
 }
 
 fn main() -> miette::Result<()> {
-    println!("Hello, world!");
+    //println!("Hello, world!");
 
-    let args = Args::parse();
+    //let args = Args::parse();
 
-    match args.command {
-        Commands::Run { filename } => {
-            let _file_contents = fs::read_to_string(&filename)
-                .into_diagnostic()
-                .wrap_err_with(|| format!("unable to read `{}`", &filename.display()))?;
-            todo!()
-        }
+    // match args.command {
+    //     Commands::Run { filename } => {
+    //         let _file_contents = fs::read_to_string(&filename)
+    //             .into_diagnostic()
+    //             .wrap_err_with(|| format!("unable to read `{}`", &filename.display()))?;
+    //         todo!()
+    //     }
+    // };
+
+    // for token in Lexer::new(&file_contents) {}
+
+    for token in Lexer::new(
+        "
+        name updateUser
+        put \"${base}/users/42\"
+        ",
+    ) {
+        let _token = match token {
+            Ok(t) => t,
+            Err(e) => {
+                // eprintln!("===>{:?}", e.to_string());
+                return Err(e);
+                //continue;
+            }
+        };
+        println!("{:?}", token);
     }
 
     Ok(())
 }
+
+// "
+
+//     //hello
+//     !={}:{}!=   {}===
+//     ",
+
+//false nil true let import json multipart raw form save assert matches in contains test ws graphql
