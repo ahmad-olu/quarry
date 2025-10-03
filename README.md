@@ -8,13 +8,13 @@ quarry is a developer-first API client that blends the simplicity of *VSCode’s
 
 ```qa
 // Variables
-let token = "abcd1234"
-let base = "https://api.example.com"
+let token = `abcd1234`
+let base = `https://api.example.com`
 
 // Request
 name: getUsers
-get ${base}/users
-Authorization: Bearer ${token}
+get `${base}/users`
+Authorization: `Bearer ${token}`
 
 json {
   "limit": 20,
